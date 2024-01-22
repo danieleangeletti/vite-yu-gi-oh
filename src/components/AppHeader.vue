@@ -8,7 +8,13 @@ export default {
 </script>
 
 <template>
-  <header>HEADER</header>
+  <header>
+    <h1>Yu-Gi-Oh Api</h1>
+  </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+  height: 10vh;
+}
+</style>
