@@ -1,12 +1,16 @@
 <script>
+import SingleCard from "./SingleCard.vue";
+import { store } from "../store.js";
+
 export default {
   data() {
-    return {};
+    return { store };
+  },
+  components: {
+    SingleCard,
   },
   methods: {},
-  props: {
-    cards_list: Object,
-  },
+  props: {},
 };
 </script>
 
@@ -16,20 +20,8 @@ export default {
     <div class="container bg-white">
       <div class="bg-dark text-white">Found x cards</div>
       <div class="row">
-        <div class="col-3" v-for="(card, i) in cards_list" :key="i">
-          <div class="single_card">
-            <div class="img-container">
-              <img
-                class="w-100 h-100"
-                :src="card.card_images[0].image_url"
-                :alt="card.name"
-              />
-            </div>
-            <div>
-              <h5>{{ card.name }}</h5>
-              <h5>{{ card.archetype }}</h5>
-            </div>
-          </div>
+        <div class="col-3" v-for="(card, i) in store.cards" :key="i">
+          <SingleCard :card="card" />
         </div>
       </div>
     </div>
