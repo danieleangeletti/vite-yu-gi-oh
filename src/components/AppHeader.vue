@@ -13,8 +13,4 @@ export default {
   </header>
 </template>
 
-<style lang="scss" scoped>
-header {
-  height: 10vh;
-}
-</style>
+<style lang="scss" scoped></style>
