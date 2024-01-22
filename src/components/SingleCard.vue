@@ -9,19 +9,26 @@ export default {
 </script>
 
 <template>
-  <div class="single_card">
+  <div class="single_card mb-3">
     <div class="img-container">
       <img
-        class="w-100 h-100"
+        class="w-100"
         :src="card.card_images[0].image_url"
         :alt="card.name"
       />
     </div>
-    <div>
-      <h5>{{ card.name }}</h5>
+    <div class="main-bg-color h-104 d-flex flex-column align-items-center">
+      <h5 class="text-white">{{ card.name.toUpperCase() }}</h5>
       <h5>{{ card.archetype }}</h5>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main-bg-color {
+  background-color: #d48f38;
+}
+.h-104 {
+  height: 104px;
+}
+</style>
