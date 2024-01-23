@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       store,
-      selected_archetype: "",
+      selected_archetype: "0",
     };
   },
   components: {
@@ -15,16 +15,14 @@ export default {
   },
   methods: {
     get_data_from_archetypes() {
-      axios
-        .get(this.store.base_url, {
-          params: {
-            archetype: this.selected_archetype,
-          },
-        })
-        .then((response) => {
-          this.store.cards = response.data.data;
-          console.log(this.store.cards);
-        });
+      let myUrl = this.store.base_url;
+      if (this.selected_archetype != "0") {
+        myUrl += "?archetype=" + this.selected_archetype;
+      }
+      axios.get(myUrl).then((response) => {
+        this.store.cards = response.data.data;
+        console.log(this.store.cards);
+      });
     },
   },
   props: {},
@@ -39,7 +37,7 @@ export default {
         class="form-select"
         aria-label="Default select example"
       >
-        <option selected value="">Select Archetype</option>
+        <option value="0">Select Archetype</option>
         <option
           v-for="(archetype, i) in store.archetypes"
           :value="archetype.archetype_name"
