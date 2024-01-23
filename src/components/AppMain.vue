@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     get_data_from_archetypes() {
-      let my_url = this.store.base_url;
+      let my_url = this.store.complete_base_url;
       if (store.selected_archetype != "") {
         my_url += "?archetype=" + store.selected_archetype;
       }
