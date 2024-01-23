@@ -22,6 +22,10 @@ export default {
       this.store.cards = response.data.data;
       console.log(this.store.cards);
     });
+    axios.get(this.store.archetypes_base_url).then((response) => {
+      this.store.archetypes = response.data;
+      console.log(this.store.archetypes);
+    });
   },
 };
 </script>
