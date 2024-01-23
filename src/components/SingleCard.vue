@@ -18,7 +18,7 @@ export default {
       />
     </div>
     <div class="main-bg-color h-104 d-flex flex-column align-items-center">
-      <h5 class="text-white">{{ card.name.toUpperCase() }}</h5>
+      <h5 class="text-white text-center">{{ card.name.toUpperCase() }}</h5>
       <h5>{{ card.archetype }}</h5>
     </div>
   </div>

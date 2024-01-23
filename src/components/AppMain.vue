@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       store,
-      selected_archetype: "0",
+      selected_archetype: "",
     };
   },
   components: {
@@ -15,11 +15,11 @@ export default {
   },
   methods: {
     get_data_from_archetypes() {
-      let myUrl = this.store.base_url;
-      if (this.selected_archetype != "0") {
-        myUrl += "?archetype=" + this.selected_archetype;
+      let my_url = this.store.base_url;
+      if (this.selected_archetype != "") {
+        my_url += "?archetype=" + this.selected_archetype;
       }
-      axios.get(myUrl).then((response) => {
+      axios.get(my_url).then((response) => {
         this.store.cards = response.data.data;
         console.log(this.store.cards);
       });
@@ -33,11 +33,12 @@ export default {
   <main>
     <div class="container pt-4 pb-4 d-flex">
       <select
+        @change="get_data_from_archetypes"
         v-model="selected_archetype"
         class="form-select"
         aria-label="Default select example"
       >
-        <option value="0">Select Archetype</option>
+        <option value="">Select Archetype</option>
         <option
           v-for="(archetype, i) in store.archetypes"
           :value="archetype.archetype_name"
@@ -45,17 +46,13 @@ export default {
           {{ archetype.archetype_name }}
         </option>
       </select>
-      <button
-        @click="get_data_from_archetypes"
-        type="button"
-        class="btn btn-primary ms-4"
-      >
-        GENERATE CARDS
-      </button>
     </div>
     <div class="container bg-white pt-3">
       <div class="bg-dark text-white pt-2 pb-2">
-        Found {{ store.cards.length }} cards
+        <span>Found {{ store.cards.length }} cards</span>
+        <span v-if="selected_archetype != ''"
+          >: each of which of {{ selected_archetype }} archetype</span
+        >
       </div>
       <div class="row">
         <div class="col-2" v-for="(card, i) in store.cards" :key="i">
