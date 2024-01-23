@@ -2,22 +2,23 @@
 import SingleCard from "./SingleCard.vue";
 import { store } from "../store.js";
 import axios from "axios";
+import CardsArchetype from "./CardsArchetype.vue";
 
 export default {
   data() {
     return {
       store,
-      selected_archetype: "",
     };
   },
   components: {
     SingleCard,
+    CardsArchetype,
   },
   methods: {
     get_data_from_archetypes() {
       let my_url = this.store.base_url;
-      if (this.selected_archetype != "") {
-        my_url += "?archetype=" + this.selected_archetype;
+      if (store.selected_archetype != "") {
+        my_url += "?archetype=" + store.selected_archetype;
       }
       axios.get(my_url).then((response) => {
         this.store.cards = response.data.data;
@@ -34,7 +35,7 @@ export default {
     <div class="container pt-4 pb-4 d-flex">
       <select
         @change="get_data_from_archetypes"
-        v-model="selected_archetype"
+        v-model="store.selected_archetype"
         class="form-select"
         aria-label="Default select example"
       >
@@ -49,10 +50,7 @@ export default {
     </div>
     <div class="container bg-white pt-3">
       <div class="bg-dark text-white pt-2 pb-2">
-        <span>Found {{ store.cards.length }} cards</span>
-        <span v-if="selected_archetype != ''"
-          >: each of which of {{ selected_archetype }} archetype</span
-        >
+        <CardsArchetype />
       </div>
       <div class="row">
         <div class="col-2" v-for="(card, i) in store.cards" :key="i">

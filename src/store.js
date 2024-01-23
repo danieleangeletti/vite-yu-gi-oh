@@ -6,4 +6,5 @@ export const store = reactive({
   cards: [],
   archetypes_base_url: "https://db.ygoprodeck.com/api/v7/archetypes.php",
   archetypes: [],
+  selected_archetype: "",
 });
