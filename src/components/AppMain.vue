@@ -1,28 +1,45 @@
 <script>
 import SingleCard from "./SingleCard.vue";
 import { store } from "../store.js";
+import axios from "axios";
 
 export default {
   data() {
     return {
       store,
+      selected_archetype: "",
     };
   },
   components: {
     SingleCard,
   },
-  methods: {},
+  methods: {
+    get_data_from_archetypes() {
+      axios
+        .get(this.store.base_url, {
+          params: {
+            archetype: this.selected_archetype,
+          },
+        })
+        .then((response) => {
+          this.store.cards = response.data.data;
+          console.log(this.store.cards);
+        });
+    },
+  },
   props: {},
 };
 </script>
 
 <template>
   <main>
-    <div class="container pt-4 pb-4">
-      <select class="form-select" aria-label="Default select example">
+    <div class="container pt-4 pb-4 d-flex">
+      <select
+        v-model="selected_archetype"
+        class="form-select"
+        aria-label="Default select example"
+      >
         <option selected value="">Select Archetype</option>
-        <!-- Le options della select vengono fatte con un v-for sull'array di oggetti -->
-        <!-- L'array di oggetti viene popolato tramite la chiamata API ad archetype -->
         <option
           v-for="(archetype, i) in store.archetypes"
           :value="archetype.archetype_name"
@@ -30,6 +47,13 @@ export default {
           {{ archetype.archetype_name }}
         </option>
       </select>
+      <button
+        @click="get_data_from_archetypes"
+        type="button"
+        class="btn btn-primary ms-4"
+      >
+        GENERATE CARDS
+      </button>
     </div>
     <div class="container bg-white pt-3">
       <div class="bg-dark text-white pt-2 pb-2">

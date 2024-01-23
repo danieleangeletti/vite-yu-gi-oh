@@ -29,6 +29,6 @@ export default {
   background-color: #d48f38;
 }
 .h-104 {
-  height: 104px;
+  height: 200px;
 }
 </style>
